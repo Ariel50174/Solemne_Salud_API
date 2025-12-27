@@ -49,7 +49,7 @@ st.subheader("Vista previa")
 st.dataframe(df.head(50), use_container_width=True)
 st.write(f"Filas: **{len(df):,}** | Columnas: **{len(df.columns)}**")
 
-# --- Limpieza mínima / nulos
+# --- Limpieza nulos
 col1, col2 = st.columns([1, 1])
 with col1:
     st.markdown("### Nulos por columna")
@@ -58,12 +58,12 @@ with col2:
     st.markdown("### Descripción numérica")
     st.dataframe(df.describe(include="number").T, use_container_width=True)
 
-# --- Selección de variables (genérico + sugerencias típicas DEIS)
+# --- Selección de variables
 st.subheader("Exploración interactiva")
 num = numeric_cols(df)
 cat = object_cols(df)
 
-# Sugerencias típicas (si existen)
+# Sugerencias típicas
 year_col = pick_first_existing(df, ["anio", "anio_estadistico", "AÑO", "Anio", "year"])
 week_col = pick_first_existing(df, ["semana", "semana_epidemiologica", "Semana", "SE"])
 region_col = pick_first_existing(df, ["region", "Region", "REGION"])
@@ -77,7 +77,7 @@ with right:
     group_default = group_candidates[0] if group_candidates else (cat[0] if cat else df.columns[0])
     group_by = st.selectbox("Agrupar por (categoría)", options=df.columns.tolist(), index=list(df.columns).index(group_default))
 
-# Filtros básicos (si hay año/semana)
+# Filtros básicos
 filters = {}
 if year_col and pd.api.types.is_numeric_dtype(df[year_col]):
     yr_min, yr_max = int(df[year_col].min()), int(df[year_col].max())

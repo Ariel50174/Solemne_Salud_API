@@ -17,13 +17,3 @@ python -m venv .venv
 pip install -r requirements.txt
 streamlit run app.py
 ```
-
-## Despliegue en Streamlit Cloud (paso a paso)
-1. Crea un repositorio en GitHub y sube estos archivos (app.py, ckan_client.py, analysis.py, requirements.txt).
-2. En Streamlit Cloud: New app -> selecciona el repo.
-3. Main file: `app.py`
-4. Deploy.
-
-## Notas
-- El recurso es **parquet**, por eso se incluye `pyarrow` en requirements.
-- La descarga del archivo se realiza con `requests.get` (GET).
